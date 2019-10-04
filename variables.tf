@@ -1,5 +1,6 @@
 variable "create_vpc_flow_log" {
   description = "Controls whether to create the VPC Flow Log"
+  type        = bool
   default     = true
 }
 
@@ -38,4 +39,3 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
-
