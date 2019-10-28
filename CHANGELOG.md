@@ -4,11 +4,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### 1.0.2
+
+**Released**: 2019.10.28
+
+**Commit Delta**: [Change from 1.0.1 release](https://github.com/plus3it/terraform-aws-tardigrade-vpc-flow-log/compare/1.0.1...1.0.2)
+
+**Summary**:
+
+*   Pins tfdocs-awk version
+*   Updates documentation generation make targets
+*   Adds documentation to the test modules
+*   Minor changelog fixup
+
 ### 1.0.1
 
 **Released**: 2019.10.04
 
-**Commit Delta**: [Change from 1.0.1 release](https://github.com/plus3it/terraform-aws-tardigrade-vpc-flow-log/compare/1.0.0...1.0.1)
+**Commit Delta**: [Change from 1.0.0 release](https://github.com/plus3it/terraform-aws-tardigrade-vpc-flow-log/compare/1.0.0...1.0.1)
 
 **Summary**:
 
