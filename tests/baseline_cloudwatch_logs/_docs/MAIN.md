@@ -1,1 +1,0 @@
-# Baseline Cloudwatch Logs Test
