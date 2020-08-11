@@ -28,6 +28,12 @@ variable "log_destination" {
   default     = null
 }
 
+variable "log_format" {
+  description = "(Optional) The fields to include in the flow log record, in the order in which they should appear."
+  type        = string
+  default     = null
+}
+
 variable "log_group_name" {
   description = "(Optional) Name to assign to the CloudWatch Log Group. If blank, will use `/aws/vpc/flow-log/$$${var.vpc_id}`"
   type        = string
