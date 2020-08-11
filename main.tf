@@ -49,6 +49,7 @@ resource "aws_flow_log" "this" {
   log_destination_type = var.log_destination_type
   log_destination      = var.log_destination_type == "s3" ? var.log_destination : join("", aws_cloudwatch_log_group.this.*.arn)
   iam_role_arn         = local.iam_role_arn
+  log_format           = var.log_format
   vpc_id               = var.vpc_id
   traffic_type         = "ALL"
 }
