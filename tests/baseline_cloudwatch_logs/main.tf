@@ -19,7 +19,6 @@ module "baseline_s3" {
     aws = aws
   }
 
-  create_vpc_flow_log  = true
   vpc_id               = module.vpc.vpc_id
   log_destination_type = "cloud-watch-logs"
 }

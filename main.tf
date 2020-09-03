@@ -1,6 +1,3 @@
-provider "aws" {
-}
-
 locals {
   iam_role_name   = "flow-log-${format("%v", var.vpc_id)}"
   log_group_name  = var.log_group_name == null ? "/aws/vpc/flow-log/${format("%v", var.vpc_id)}" : var.log_group_name
@@ -12,7 +9,7 @@ data "aws_partition" "current" {
 }
 
 data "aws_iam_policy_document" "role" {
-  count = var.create_vpc_flow_log && local.create_iam_role ? 1 : 0
+  count = local.create_iam_role ? 1 : 0
 
   statement {
     actions = [
@@ -31,7 +28,7 @@ data "aws_iam_policy_document" "role" {
 }
 
 data "aws_iam_policy_document" "trust" {
-  count = var.create_vpc_flow_log && local.create_iam_role ? 1 : 0
+  count = local.create_iam_role ? 1 : 0
 
   statement {
     actions = ["sts:AssumeRole"]
@@ -44,7 +41,6 @@ data "aws_iam_policy_document" "trust" {
 }
 
 resource "aws_flow_log" "this" {
-  count = var.create_vpc_flow_log ? 1 : 0
 
   log_destination_type = var.log_destination_type
   log_destination      = var.log_destination_type == "s3" ? var.log_destination : join("", aws_cloudwatch_log_group.this.*.arn)
@@ -55,14 +51,14 @@ resource "aws_flow_log" "this" {
 }
 
 resource "aws_cloudwatch_log_group" "this" {
-  count = var.create_vpc_flow_log && var.log_destination_type == "cloud-watch-logs" ? 1 : 0
+  count = var.log_destination_type == "cloud-watch-logs" ? 1 : 0
 
   name = local.log_group_name
   tags = var.tags
 }
 
 resource "aws_iam_role" "this" {
-  count = var.create_vpc_flow_log && local.create_iam_role ? 1 : 0
+  count = local.create_iam_role ? 1 : 0
 
   name               = local.iam_role_name
   assume_role_policy = data.aws_iam_policy_document.trust[0].json
@@ -70,7 +66,7 @@ resource "aws_iam_role" "this" {
 }
 
 resource "aws_iam_role_policy" "this" {
-  count = var.create_vpc_flow_log && local.create_iam_role ? 1 : 0
+  count = local.create_iam_role ? 1 : 0
 
   name   = local.iam_role_name
   role   = aws_iam_role.this[0].id
