@@ -1,9 +1,3 @@
-variable "create_vpc_flow_log" {
-  description = "Controls whether to create the VPC Flow Log"
-  type        = bool
-  default     = true
-}
-
 variable "log_destination_type" {
   description = "Controls whether to create the VPC Flow Log with a `cloud-watch-logs` or `s3` bucket destination"
   type        = string

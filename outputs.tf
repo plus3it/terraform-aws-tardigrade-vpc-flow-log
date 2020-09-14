@@ -1,7 +1,7 @@
 # VPC Flow Log
 output "flow_log_id" {
   description = "The ID of the VPC Flow Log"
-  value       = join("", aws_flow_log.this.*.id)
+  value       = aws_flow_log.this.id
 }
 
 output "log_group_arn" {
