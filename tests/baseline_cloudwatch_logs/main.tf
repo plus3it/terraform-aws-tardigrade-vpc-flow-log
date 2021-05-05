@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 module "vpc" {
-  source = "github.com/terraform-aws-modules/terraform-aws-vpc?ref=v2.15.0"
+  source = "github.com/terraform-aws-modules/terraform-aws-vpc?ref=v3.0.0"
 
   providers = {
     aws = aws
