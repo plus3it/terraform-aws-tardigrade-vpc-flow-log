@@ -1,5 +1,5 @@
 module "vpc" {
-  source = "github.com/terraform-aws-modules/terraform-aws-vpc?ref=v3.11.5"
+  source = "github.com/terraform-aws-modules/terraform-aws-vpc?ref=v3.12.0"
 
   providers = {
     aws = aws
