@@ -8,7 +8,7 @@ resource "aws_s3_bucket" "this" {
 }
 
 module "vpc" {
-  source = "github.com/terraform-aws-modules/terraform-aws-vpc?ref=v3.14.2"
+  source = "github.com/terraform-aws-modules/terraform-aws-vpc?ref=v3.14.3"
 
   providers = {
     aws = aws
