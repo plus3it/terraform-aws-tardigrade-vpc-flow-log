@@ -1,31 +1,16 @@
 version: 2
 updates:
-- package-ecosystem: github-actions
-  directory: /
-  schedule:
-    interval: weekly
-- package-ecosystem: docker
-  directory: "/"
-  schedule:
-    interval: daily
-  open-pull-requests-limit: 10
-- package-ecosystem: terraform
-  directory: "/"
-  schedule:
-    interval: daily
-  open-pull-requests-limit: 10
-- package-ecosystem: terraform
-  directory: "/tests/baseline_s3"
-  schedule:
-    interval: daily
-  open-pull-requests-limit: 10
-- package-ecosystem: terraform
-  directory: "/tests/baseline_s3_log_format"
-  schedule:
-    interval: daily
-  open-pull-requests-limit: 10
-- package-ecosystem: terraform
-  directory: "/tests/baseline_cloudwatch_logs"
-  schedule:
-    interval: daily
-  open-pull-requests-limit: 10
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: docker
+    directory: "/"
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 10
+  - package-ecosystem: terraform
+    directory: "/"
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 10
