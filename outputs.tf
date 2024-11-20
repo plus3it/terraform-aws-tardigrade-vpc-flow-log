@@ -1,26 +1,15 @@
 # VPC Flow Log
-output "flow_log_id" {
-  description = "The ID of the VPC Flow Log"
-  value       = aws_flow_log.this.id
+output "flow_log" {
+  description = "Object of attributes for the Flow Log"
+  value       = aws_flow_log.this
 }
 
-output "log_group_arn" {
-  description = "ARN of the Log Group for the VPC Flow Log"
-  value       = join("", aws_cloudwatch_log_group.this.*.arn)
+output "cloudwatch_log_group" {
+  description = "Object of attributes for the CloudWatch Log Group"
+  value       = aws_cloudwatch_log_group.this
 }
 
-output "iam_role_arn" {
-  description = "ARN of the IAM Role for the VPC Flow Log"
-  value       = join("", aws_iam_role.this.*.arn)
+output "iam_role" {
+  description = "Object of attributes for the IAM Role used by the Flow Log"
+  value       = aws_iam_role.cloudwatch
 }
-
-output "iam_role_unique_id" {
-  description = "Unique ID of the IAM Role for the VPC Flow Log"
-  value       = join("", aws_iam_role.this.*.unique_id)
-}
-
-output "iam_role_name" {
-  description = "Name of the IAM Role for the VPC Flow Log"
-  value       = join("", aws_iam_role.this.*.name)
-}
-

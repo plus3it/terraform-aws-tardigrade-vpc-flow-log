@@ -1,41 +1,37 @@
-variable "log_destination_type" {
-  description = "Controls whether to create the VPC Flow Log with a `cloud-watch-logs` or `s3` bucket destination"
-  type        = string
-  default     = null
-}
+variable "flow_log" {
+  description = "Object of attributes for managing a Flow Log"
+  type = object({
+    name                 = string
+    log_destination_type = string
 
-variable "vpc_id" {
-  description = "VPC ID for which the VPC Flow Log will be created"
-  type        = string
-  default     = null
-}
+    eni_id                        = optional(string)
+    subnet_id                     = optional(string)
+    transit_gateway_id            = optional(string)
+    transit_gateway_attachment_id = optional(string)
+    vpc_id                        = optional(string)
 
-variable "iam_role_arn" {
-  description = "(Optional) ARN for the IAM role to attach to the flow log. If blank, a minimal role will be created"
-  type        = string
-  default     = null
-}
+    deliver_cross_account_role = optional(string)
+    iam_role_arn               = optional(string)
+    log_destination            = optional(string)
+    log_format                 = optional(string)
+    max_aggregation_interval   = optional(number)
+    tags                       = optional(map(string), {})
+    traffic_type               = optional(string, "ALL")
 
-variable "log_destination" {
-  description = "(Optional) The ARN of the logging destination."
-  type        = string
-  default     = null
-}
+    destination_options = optional(object({
+      file_format                = optional(string)
+      hive_compatible_partitions = optional(bool)
+      per_hour_partition         = optional(bool)
+    }))
 
-variable "log_format" {
-  description = "(Optional) The fields to include in the flow log record, in the order in which they should appear."
-  type        = string
-  default     = null
-}
-
-variable "log_group_name" {
-  description = "(Optional) Name to assign to the CloudWatch Log Group. If blank, will use `/aws/vpc/flow-log/$$${var.vpc_id}`"
-  type        = string
-  default     = null
-}
-
-variable "tags" {
-  description = "A map of tags to add to the CloudWatch Log Group for the VPC Flow Log"
-  type        = map(string)
-  default     = {}
+    cloudwatch_log_group = optional(object({
+      enable            = optional(bool, true)
+      name              = optional(string)
+      kms_key_id        = optional(string)
+      log_group_class   = optional(string, "INFREQUENT_ACCESS")
+      retention_in_days = optional(number, 30)
+      skip_destroy      = optional(bool, false)
+      tags              = optional(map(string), {})
+    }), {})
+  })
 }
