@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### [3.0.0](https://github.com/plus3it/terraform-aws-tardigrade-vpc-flow-log/releases/tag/3.0.0)
+
+**Released**: 2024.11.20
+
+**Summary**:
+
+*   Refactors module to support all attributes of the Flow Log resource
+*   Supported sources include:
+    * VPC ID
+    * Subnet ID
+    * Transit Gateway ID
+    * Transit Gateway Attachment ID
+    * Elastic Network Interface ID
+*   Supported destination types include:
+    * CloudWatch Log Group
+    * S3 Bucket
+    * Kinesis Data Firehose
+*   When the destination type is a CloudWatch Log Group, the module supports either
+    creating the log group, or providing the log group arn via the `log_destination`
+    input. For other destination types, the `log_destination` is required.
+
 ### 1.0.2
 
 **Released**: 2019.10.28
