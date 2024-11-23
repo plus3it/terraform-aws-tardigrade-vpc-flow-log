@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### [3.0.1](https://github.com/plus3it/terraform-aws-tardigrade-vpc-flow-log/releases/tag/3.0.1)
+
+**Released**: 2024.11.22
+
+**Summary**:
+
+*   Moves iam role conditions to trust policy instead of role policy, per aws guidance
+    for mitigating confused deputy problem. See also:
+    *   https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs-iam-role.html
+    *   https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html
+
 ### [3.0.0](https://github.com/plus3it/terraform-aws-tardigrade-vpc-flow-log/releases/tag/3.0.0)
 
 **Released**: 2024.11.20
