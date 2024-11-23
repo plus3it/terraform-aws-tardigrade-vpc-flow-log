@@ -97,10 +97,12 @@ locals {
 
   account_id = data.aws_caller_identity.this.account_id
   partition  = data.aws_partition.this.partition
+  region     = data.aws_region.this.name
 }
 
 data "aws_caller_identity" "this" {}
 data "aws_partition" "this" {}
+data "aws_region" "this" {}
 
 data "aws_iam_policy_document" "cloudwatch_policy" {
   count = local.create_cloudwatch_iam_role ? 1 : 0
@@ -118,21 +120,6 @@ data "aws_iam_policy_document" "cloudwatch_policy" {
       "arn:${local.partition}:logs:*:*:log-group:${local.log_group_name}",
       "arn:${local.partition}:logs:*:*:log-group:${local.log_group_name}:*",
     ]
-
-    condition {
-      test     = "StringEquals"
-      variable = "aws:SourceAccount"
-      values   = [local.account_id]
-    }
-
-    condition {
-      test     = "ArnLike"
-      variable = "aws:SourceArn"
-      values = [
-        "arn:${local.partition}:logs:*:*:log-group:${local.log_group_name}",
-        "arn:${local.partition}:logs:*:*:log-group:${local.log_group_name}:*",
-      ]
-    }
   }
 }
 
@@ -145,6 +132,18 @@ data "aws_iam_policy_document" "cloudwatch_trust" {
     principals {
       type        = "Service"
       identifiers = ["vpc-flow-logs.amazonaws.com"]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "aws:SourceAccount"
+      values   = [local.account_id]
+    }
+
+    condition {
+      test     = "ArnLike"
+      variable = "aws:SourceArn"
+      values   = ["arn:aws:ec2:${local.region}:${local.account_id}:vpc-flow-log/*"]
     }
   }
 }
